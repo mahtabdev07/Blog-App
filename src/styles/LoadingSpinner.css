@@ -1,0 +1,57 @@
+.loader {
+  display: inline-block;
+  animation: rotate 1s infinite;
+  height: 50px;
+  width: 50px;
+  position: relative;
+}
+
+.loader::before,
+.loader::after {
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loader::before {
+  animation: ball1 1s infinite;
+  background-color: #d8d8d8;
+  box-shadow: 30px 0 0 #ff3d00;
+  top: 0;
+}
+
+.loader::after {
+  animation: ball2 1s infinite;
+  background-color: #ff3d00;
+  box-shadow: 30px 0 0 #d8d8d8;
+  bottom: 0;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg) scale(0.8); }
+  50% { transform: rotate(360deg) scale(1.2); }
+  100% { transform: rotate(720deg) scale(0.8); }
+}
+
+@keyframes ball1 {
+  0% { box-shadow: 30px 0 0 #ff3d00; }
+  50% {
+    box-shadow: 0 0 0 #ff3d00;
+    transform: translate(-50%, 15px);
+  }
+  100% { box-shadow: 30px 0 0 #ff3d00; }
+}
+
+@keyframes ball2 {
+  0% { box-shadow: 30px 0 0 #d8d8d8; }
+  50% {
+    box-shadow: 0 0 0 #d8d8d8;
+    transform: translate(-50%, -15px);
+  }
+  100% { box-shadow: 30px 0 0 #d8d8d8; }
+}

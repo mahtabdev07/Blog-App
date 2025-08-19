@@ -1,16 +1,15 @@
-// prisma/seed.ts
 import { PrismaClient, BlogStatus } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("🌱 Starting database seed...");
+  console.log("Starting database seed...");
 
   await prisma.blog.deleteMany();
   await prisma.user.deleteMany();
 
-  console.log("🗑️ Cleared existing data");
+  console.log("Cleared existing data");
 
   const hashedPassword = await bcrypt.hash("password123", 10);
 
@@ -62,472 +61,122 @@ async function main() {
     }),
   ]);
 
-  console.log(`👥 Created ${users.length} users`);
+  console.log(`Created ${users.length} users`);
 
-  // Create sample blogs with real working cover images
   const blogData = [
     {
-      title: "Getting Started with Next.js 14",
-      slug: "getting-started-with-nextjs-14",
+      title: 'Oscar Hopeful: "The Ritual" set for chilling fall premiere',
+      slug: "the-ritual-film-2025",
       excerpt:
-        "Learn the fundamentals of Next.js 14 including the new App Router, Server Components, and more.",
-      content: `Next.js 14 brings exciting new features that make building React applications faster and more efficient than ever before.
-
-## Key Features
-
-### App Router
-The new App Router provides a more intuitive way to organize your application structure. With file-system based routing, creating new pages and layouts becomes incredibly simple.
-
-### Server Components
-Server Components allow you to render components on the server, reducing the amount of JavaScript sent to the client and improving performance.
-
-### Improved Performance
-Next.js 14 includes significant performance improvements, including faster cold starts and optimized bundling.
-
-## Getting Started
-
-To create a new Next.js 14 project:
-
-\`\`\`bash
-npx create-next-app@latest my-app --typescript --tailwind --app
-\`\`\`
-
-This command sets up a new project with TypeScript and Tailwind CSS, using the new App Router.
-
-## Conclusion
-
-Next.js 14 is a powerful framework that continues to push the boundaries of what's possible with React applications.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=1",
-      status: BlogStatus.PUBLISHED,
-      authorId: users[0].id,
-    },
-    {
-      title: "Building Beautiful UIs with shadcn/ui",
-      slug: "building-beautiful-uis-with-shadcn-ui",
-      excerpt:
-        "Discover how shadcn/ui components can help you build stunning, accessible user interfaces quickly.",
-      content: `shadcn/ui has revolutionized the way we build React components. It provides beautifully designed, accessible components that you can copy and paste into your projects.
-
-## Why shadcn/ui?
-
-### Copy, Don't Install
-Unlike traditional component libraries, shadcn/ui lets you copy components directly into your project. This gives you full control over the code.
-
-### Built on Radix UI
-All components are built on top of Radix UI primitives, ensuring excellent accessibility out of the box.
-
-### Customizable
-Components are designed to be easily customizable using Tailwind CSS classes.
-
-## Getting Started
-
-Install shadcn/ui in your project:
-
-\`\`\`bash
-npx shadcn-ui@latest init
-\`\`\`
-
-Then add components as needed:
-
-\`\`\`bash
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add card
-\`\`\`
-
-## Example Usage
-
-\`\`\`tsx
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-
-export function MyComponent() {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Welcome</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Button>Get Started</Button>
-      </CardContent>
-    </Card>
-  )
-}
-\`\`\`
-
-The result is beautiful, accessible components that integrate seamlessly with your design system.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=2",
+        'Indie horror sensation "The Ritual" is expected to be a festival sleeper hit, with an eerie new poster released for its October debut.',
+      content: `Emerging director Olly Stevens brings "The Ritual," a dark new folk horror film, to audiences this fall. Expect an intense atmosphere, a haunting score, and a harrowing story of survival as a group of friends confront ancient evils in Britain's remote countryside.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/9dac1ff2caf583ba92d8269d7de3119114ef88a7.png",
       status: BlogStatus.PUBLISHED,
       authorId: users[1].id,
     },
     {
-      title: "GraphQL vs REST: Which Should You Choose?",
-      slug: "graphql-vs-rest-which-should-you-choose",
+      title: `From February 27, in cinemas, "Cleaner" - an action thriller from the director of "Casino Royale" - will be released`,
+      slug: "cleaner-movie-2025",
       excerpt:
-        "A comprehensive comparison of GraphQL and REST APIs to help you make the right choice for your next project.",
-      content: `The debate between GraphQL and REST has been ongoing for years. Both have their strengths and use cases.
-
-## GraphQL Advantages
-
-### Single Endpoint
-GraphQL uses a single endpoint for all operations, simplifying API management.
-
-### Flexible Queries
-Clients can request exactly the data they need, reducing over-fetching and under-fetching.
-
-### Strong Type System
-GraphQL provides a robust type system that enables excellent tooling and developer experience.
-
-## REST Advantages
-
-### Simplicity
-REST is straightforward and well-understood by most developers.
-
-### Caching
-HTTP caching works naturally with REST endpoints.
-
-### Tooling
-Extensive tooling ecosystem with mature debugging and monitoring solutions.
-
-## When to Use Each
-
-### Choose GraphQL When:
-- You need flexible data fetching
-- You're building a complex frontend application
-- You want strong typing and excellent developer tools
-
-### Choose REST When:
-- You need simple, cacheable operations
-- You're working with file uploads/downloads
-- Your team is more familiar with REST patterns
-
-## Conclusion
-
-Both GraphQL and REST are excellent choices. The decision should be based on your specific project requirements and team expertise.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=3",
+        'A gripping tale of redemption and survival, "Cleaner" follows a former hitman forced to confront his past when a job goes wrong.',
+      content: `In "Cleaner," a former hitman is pulled back into the criminal underworld when a routine job takes a deadly turn. As he fights to protect his family and survive the chaos, he must confront the ghosts of his past and make impossible choices. With stunning action sequences and a powerful performance from the lead actor, "Cleaner" is a must-see for thriller fans.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/9c14f7270f9920e31e41249472157d43a43ae28c.jpg",
       status: BlogStatus.PUBLISHED,
-      authorId: users[2].id,
-    },
-    {
-      title: "Advanced TypeScript Patterns for React",
-      slug: "advanced-typescript-patterns-for-react",
-      excerpt:
-        "Master advanced TypeScript patterns to write more robust and maintainable React applications.",
-      content: `TypeScript and React make a powerful combination. Here are some advanced patterns that will level up your development.
-
-## Generic Components
-
-Create reusable components with generics:
-
-\`\`\`tsx
-interface ListProps<T> {
-  items: T[]
-  renderItem: (item: T) => React.ReactNode
-}
-
-function List<T>({ items, renderItem }: ListProps<T>) {
-  return (
-    <ul>
-      {items.map((item, index) => (
-        <li key={index}>{renderItem(item)}</li>
-      ))}
-    </ul>
-  )
-}
-\`\`\`
-
-## Discriminated Unions
-
-Handle different states elegantly:
-
-\`\`\`tsx
-type LoadingState = { status: 'loading' }
-type SuccessState = { status: 'success'; data: any[] }
-type ErrorState = { status: 'error'; error: string }
-
-type State = LoadingState | SuccessState | ErrorState
-
-function handleState(state: State) {
-  switch (state.status) {
-    case 'loading':
-      return <div>Loading...</div>
-    case 'success':
-      return <div>Data: {state.data.length} items</div>
-    case 'error':
-      return <div>Error: {state.error}</div>
-  }
-}
-\`\`\`
-
-These patterns help create more robust and maintainable applications.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=4",
-      status: BlogStatus.DRAFT,
       authorId: users[0].id,
     },
     {
-      title: "Database Design Best Practices",
-      slug: "database-design-best-practices",
+      title: "A new animated masterpiece — “Savages” in theaters July 3",
+      slug: "a-new-animated-masterpiece-savages",
       excerpt:
-        "Learn essential database design principles to build scalable and maintainable data models.",
-      content: `Good database design is crucial for building scalable applications. Here are key principles to follow.
+        "“Savages” in Theatres July 3 “Wild Family” follows the story of 11-year-old Keria, who lives with her father in Borneo near the tropical rainforest.",
+      content: `“Savages” in Theatres July 3 “Wild Family” follows the story of 11-year-old Keria, who lives with her father in Borneo near the tropical rainforest. Her mother belonged to the indigenous Penan people; a fact Keria hadn’t paid much attention to—until she met her relatives on her mother’s side. The situation becomes complicated when logging companies begin clearing the forest, threatening the traditional way of life of her tribe. Joined by her cousin Selay and a baby orangutan named Osha, Keria decides to fight for the preservation of the forest and her people’s culture. The film explores powerful themes of environmental protection, ancestral traditions, and the resilience of children.
 
-## Normalization
-
-Normalize your data to reduce redundancy:
-
-### First Normal Form (1NF)
-- Each column contains atomic values
-- No repeating groups
-
-### Second Normal Form (2NF)
-- Must be in 1NF
-- All non-key attributes depend on the entire primary key
-
-### Third Normal Form (3NF)
-- Must be in 2NF
-- No transitive dependencies
-
-## Indexing Strategy
-
-### Primary Keys
-Always use meaningful primary keys when possible.
-
-### Foreign Keys
-Ensure referential integrity with proper foreign key constraints.
-
-### Performance Indexes
-Add indexes on columns used in WHERE clauses and JOINs.
-
-## Data Types
-
-Choose appropriate data types:
-- Use specific numeric types (INT, BIGINT)
-- VARCHAR for variable-length strings
-- TEXT for large text content
-- TIMESTAMP for date/time data
-
-These principles will help you build robust, scalable databases.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=5",
+“Savages” premiered to acclaim at the 2024 Cannes Film Festival, and now this vibrant, adventure-filled story is ready to capture the hearts of Russian audiences starting July 3.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/0bf4f6754dd92f6f95f1ca768b0e6baf1f1c6daf.jpg",
       status: BlogStatus.PUBLISHED,
       authorId: users[2].id,
     },
     {
-      title: "Mastering CSS Grid and Flexbox",
-      slug: "mastering-css-grid-and-flexbox",
+      title:
+        "Hayao Miyazaki's legendary film Princess Mononoke in theatres in a newly restored 4K version",
+      slug: "hayao-miyazaki-princess-mononoke-4k",
       excerpt:
-        "Learn when and how to use CSS Grid and Flexbox to create responsive layouts efficiently.",
-      content: `CSS Grid and Flexbox are powerful layout systems that complement each other. Understanding when to use each is key to efficient web development.
+        "On August 14, 2025, the film distribution company RWV Film will release Hayao Miyazaki’s legendary film Princess Mononoke in theatres in a newly restored 4K version.",
+      content: `On August 14, 2025, the film distribution company RWV Film will release Hayao Miyazaki’s legendary film Princess Mononoke in theatres in a newly restored 4K version. This adventurous animated fantasy, inspired by Japanese history and mythology, is being re-released in celebration of Studio Ghibli’s 40th anniversary. The film is considered one of the studio’s greatest masterpieces and also one of its most ambitious works. It will be shown with a new dub by Studiynaya Banda. 
 
-## CSS Grid: For 2D Layouts
-
-Grid excels at creating complex, two-dimensional layouts:
-
-\`\`\`css
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-\`\`\`
-
-### When to Use Grid:
-- Complex page layouts
-- Card-based designs
-- Magazine-style layouts
-- When you need precise control over rows and columns
-
-## Flexbox: For 1D Layouts
-
-Flexbox is perfect for one-dimensional layouts:
-
-\`\`\`css
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-\`\`\`
-
-### When to Use Flexbox:
-- Navigation bars
-- Centering content
-- Distributing space between items
-- Simple responsive designs
-
-## Combining Both
-
-The real power comes from combining Grid and Flexbox:
-
-\`\`\`css
-.page-layout {
-  display: grid;
-  grid-template-areas: 
-    "header header"
-    "sidebar main"
-    "footer footer";
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-\`\`\`
-
-Master both tools and choose the right one for each situation.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=6",
+To mark Studio Ghibli’s 40th anniversary, Princess Mononoke returns to the big screen in stunning 4K restoration. According to Studio Vice President Atsushi Okui, Ghibli films were originally released on film stock, but with many cinemas now equipped for 4K projection, the studio decided to present this landmark animated film in higher quality.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/04/c02fdf7fd2fe5a5c7ffc324aaccd88c38783346b.jpg",
       status: BlogStatus.PUBLISHED,
-      authorId: users[1].id,
+      authorId: users[0].id,
     },
     {
-      title: "Building Scalable React Applications",
-      slug: "building-scalable-react-applications",
+      title: '"How to Make a Killing" in cinemas from May 15!',
+      slug: "how-to-make-a-killing",
       excerpt:
-        "Discover architectural patterns and best practices for building large-scale React applications.",
-      content: `Building scalable React applications requires careful planning and adherence to proven patterns and principles.
+        'Watch "Fargo in French" from the producers of  "Cat & Dog" and "The Pot-a-Feu". "How to Make a Killing" is the third directorial project by Franck Dubosc, who also played one of the main roles in the film.',
+      content: `Watch "Fargo in French" from the producers of  "Cat & Dog" and "The Pot-a-Feu".
 
-## Project Structure
 
-Organize your code for scalability:
 
-\`\`\`
-src/
-├── components/
-│   ├── ui/           # Reusable UI components
-│   ├── features/     # Feature-specific components
-│   └── layouts/      # Layout components
-├── hooks/            # Custom hooks
-├── services/         # API and external services
-├── utils/           # Utility functions
-└── types/           # TypeScript definitions
-\`\`\`
+"How to Make a Killing" is the third directorial project by Franck Dubosc, who also played one of the main roles in the film. This witty black comedy has already become a hit in France, having collected more than 10 million euros. Such success is not surprising, because the producers of such hits as "The Count of Monte Cristo" and "Recipe for Love" are behind the film. In addition, the film has already received high marks from viewers, who compare it to the cult "Fargo" by the Coen brothers.
 
-## Component Design Principles
 
-### Single Responsibility
-Each component should have one clear purpose:
 
-\`\`\`tsx
-// ❌ Too many responsibilities
-function UserDashboard() {
-  // Handles user data, notifications, settings, analytics...
-}
+The plot centers on a married couple tired of everyday and financial problems and mired in routine. There has long been no place for romance, interest in life and any hint of adventure, the relationship is limited to meager conversations over dinner. But one morning, everything changes after an absurd accident, forcing the spouses who have cooled towards each other to go on a rampage, because the temptation to get rich and try on the role of real mafiosi is something that can definitely add fire to the relationship.
 
-// ✅ Single responsibility
-function UserProfile() {
-  // Only handles user profile display
-}
-\`\`\`
 
-### Composition over Inheritance
-Use composition to build complex UIs:
 
-\`\`\`tsx
-function Card({ children, header, footer }) {
-  return (
-    <div className="card">
-      {header && <div className="card-header">{header}</div>}
-      <div className="card-body">{children}</div>
-      {footer && <div className="card-footer">{footer}</div>}
-    </div>
-  )
-}
-\`\`\`
+"How to Make a Killing" in cinemas from May 15.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/4b8e82cacd95d54e95987f517155079e9df22046.png",
+      status: BlogStatus.PUBLISHED,
+      authorId: users[4].id,
+    },
+    {
+      title: 'The сult сlassic "Progulka" returns to the big screen',
+      slug: "the-cult-classic-progulka-returns-to-the-big-screen",
+      excerpt:
+        'Aleksei Uchitel’s film "Progulka", which launched the careers of Irina Pegova, Pavel Barshak, and Evgeny Tsyganov, is hitting theatres again on July 24—22 years after its original release. ',
+      content: `Aleksei Uchitel’s film "Progulka", which launched the careers of Irina Pegova, Pavel Barshak, and Evgeny Tsyganov, is hitting theatres again on July 24—22 years after its original release. 
 
-## State Management
+One summer day in St. Petersburg, three young strangers cross paths by chance and set off on a spontaneous journey through the city. She is bold, free-spirited, and bursting with life. They are two men pulled into her playful orbit. "Progulka" isn’t just a stroll through city streets—it's a walk toward self-discovery and connection. Shot in near-real time, the film turns everyday encounters into profound moments and casual chatter into heartfelt confessions. It’s a story about youth, fleeting moments, and the art of being present. 
 
-Choose the right tool for your needs:
-- **Local state**: useState, useReducer
-- **Server state**: React Query, SWR
-- **Global state**: Zustand, Redux Toolkit
-
-## Performance Optimization
-
-- Use React.memo for expensive components
-- Implement proper key props
-- Lazy load components and routes
-- Optimize bundle size
-
-Following these patterns will help you build maintainable, scalable React applications.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=7",
+Nearly a quarter-century later, the film finds new meaning with a new generation. In a world of fast reels and screen-bound interactions, it feels especially timely—a rare chance to live fully in the moment, alongside the city and oneself. "Progulka" hasn’t lost its relevance—it’s simply gained new layers, interpreted through the lens of our times.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/8629f67479534ea5ba65482a85028482fb57d727.jpg",
       status: BlogStatus.PUBLISHED,
       authorId: users[3].id,
     },
     {
-      title: "Modern Authentication Patterns",
-      slug: "modern-authentication-patterns",
+      title: '"Leave One Day" is happening - and we know when!',
+      slug: "leave-one-day-is-happening-and-we-know-when",
       excerpt:
-        "Explore modern authentication methods including JWT, OAuth, and passwordless authentication.",
-      content: `Authentication has evolved significantly. Modern applications require robust, secure, and user-friendly authentication systems.
+        'On August 21, RWV Film will release "Leave One Day" (Partir un Jour) in theatres — the opening film of the 78th Cannes Film Festival, directed by Amélie Bonnen.',
+      content: `On August 21, RWV Film will release "Leave One Day" (Partir un Jour) in theatres — the opening film of the 78th Cannes Film Festival, directed by Amélie Bonnen. This French ode to love, music, and cuisine marks a historic moment as the first debut feature ever selected to open the Cannes Festival. "Leave One Day" also won Best Film at the VOICES Young Cinema Festival.
 
-## JWT (JSON Web Tokens)
+At the heart of the story is Cecile, a gifted chef who dreams of opening her restaurant in Paris. But when her father suffers a heart attack, her plans change, and she returns to her hometown, only to reconnect with her first love, Raphael.
 
-JWTs provide a stateless authentication mechanism:
-
-\`\`\`typescript
-interface JWTPayload {
-  sub: string    // User ID
-  exp: number    // Expiration time
-  iat: number    // Issued at
-  email: string  // User email
-}
-\`\`\`
-
-### JWT Best Practices:
-- Use short expiration times
-- Implement token refresh mechanisms
-- Store tokens securely (httpOnly cookies)
-- Include minimal necessary data
-
-## OAuth 2.0 / OpenID Connect
-
-OAuth provides secure third-party authentication:
-
-### Benefits:
-- Users don't need to create new accounts
-- Reduced password management
-- Leverages existing trusted providers
-
-### Implementation:
-\`\`\`typescript
-// Using NextAuth.js
-export const authOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-  ],
-}
-\`\`\`
-
-## Passwordless Authentication
-
-Modern alternative using magic links or codes:
-
-### Advantages:
-- Better user experience
-- Eliminates password-related vulnerabilities
-- Reduces support burden
-
-### Implementation Flow:
-1. User enters email
-2. Send magic link/code
-3. User clicks link or enters code
-4. Create authenticated session
-
-## Security Considerations
-
-- Always use HTTPS
-- Implement rate limiting
-- Use CSRF protection
-- Validate all inputs
-- Keep dependencies updated
-
-Choose authentication methods that balance security with user experience.`,
-      coverImageUrl: "https://picsum.photos/800/400?random=8",
-      status: BlogStatus.DRAFT,
-      authorId: users[4].id,
+"Leave One Day" is a love letter to the past, to French music and culinary traditions, and the warmth, wit, and authenticity of life in the French provinces.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/03/5ce04197b70660699ae5b634667a677cf6277ddf.jpg",
+      status: BlogStatus.PUBLISHED,
+      authorId: users[3].id,
+    },
+    {
+      title: "The supernatural horror Siccin 7 in theatres on August 21",
+      slug: "the-supernatural-horror-siccin-7",
+      excerpt:
+        "Turkish horror master Alper Mestçi returns with Siccin 7: supernatural terror based on true events, in cinemas August 21.",
+      content: `Director Alper Mestçi, renowned for his chilling work in Turkish horror, presents Siccin 7 — a film inspired by real events. Dr. Kemal moves his family into an ancestral home, only to face inexplicable horrors and forbidden rituals performed under the Black Moon. On August 21, the film distribution company RWV Film will release the supernatural horror movie Siccin 7 in theatres. This is a new film by Alper Mestçi, one of Turkey’s leading genre directors whose works are recognised internationally. The storyline is based on real events.
+The film follows Dr. Kemal, who moves his family into his uncle’s mansion, hoping to heal his seriously ill daughter. Matters are further complicated by his mother’s progressing Alzheimer’s disease. Under the guise of helping Kemal, a mysterious young woman named Meral moves into the house—but her true intention is to perform a ritual under the Black Moon.`,
+      coverImageUrl:
+        "https://rwvfilm.com/uploads/media/image/0001/04/70ab21c39700ccfb06206458f04244146a99becd.png",
+      status: BlogStatus.PUBLISHED,
+      authorId: users[2].id,
     },
   ];
 
@@ -535,19 +184,12 @@ Choose authentication methods that balance security with user experience.`,
     blogData.map((blog) => prisma.blog.create({ data: blog }))
   );
 
-  console.log(`📝 Created ${blogs.length} blogs`);
-
-  // Log summary
-  console.log("\n✅ Seed completed successfully!");
-  console.log("\n📊 Summary:");
-  console.log(`   Users: ${users.length}`);
-  console.log(`   Blogs: ${blogs.length}`);
+  console.log(`\n✅ Seed completed successfully!`);
+  console.log(`\n📊 Users: ${users.length}, Blogs: ${blogs.length}`);
   console.log(
     `   Published: ${blogs.filter((b) => b.status === "PUBLISHED").length}`
   );
   console.log(`   Drafts: ${blogs.filter((b) => b.status === "DRAFT").length}`);
-
-  // Log sample users for testing
   console.log("\n👥 Sample Users (password: password123):");
   users.forEach((user) => {
     console.log(`   ${user.name} (${user.email})`);
