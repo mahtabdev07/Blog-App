@@ -2,7 +2,7 @@ import { GraphQLClient } from "graphql-request";
 
 const endpoint =
   process.env.NODE_ENV === "production"
-    ? "https://your-domain.com/api/graphql"
+    ? "https://blog-app-graph-ql-phi.vercel.app/api/graphql"
     : "http://localhost:3000/api/graphql";
 
 export const gqlClient = new GraphQLClient(endpoint);
