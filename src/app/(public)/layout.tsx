@@ -8,8 +8,10 @@ export default function BlogsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full min-h-screen">
-      <Header />
+    <div className="w-full min-h-screen relative">
+      <div className="relative z-50">
+        <Header />
+      </div>
       <Navbar />
       <main className="w-full max-w-[92rem] mx-auto mt-5 lg:mt-8 px-4 lg:px-8 min-h-screen">
         {children}

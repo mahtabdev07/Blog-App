@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-muted text-muted-foreground pt-12 pb-8 px-4 rounded-3xl md:rounded-t-[3rem]">
+    <footer className="w-full bg-muted text-white pt-12 pb-8 px-4 rounded-3xl md:rounded-t-[3rem]">
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 text-center sm:text-left">
           <div className="flex flex-col items-center md:items-start">
@@ -13,11 +13,11 @@ const Footer = () => {
                   <div className="w-4 h-4 rounded-full bg-white"></div>
                 </div>
               </div>
-              <span className="text-2xl font-bold text-muted-foreground">
+              <span className="text-2xl font-bold text-white">
                 ModernBlog
               </span>
             </div>
-            <p className="text-xs text-muted-foreground/70 mb-3">
+            <p className="text-xs text-white mb-3">
               © {new Date().getFullYear()} All rights reserved.
             </p>
             <div className="flex space-x-3 mt-2 justify-center md:justify-start">
@@ -26,43 +26,43 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="rounded bg-muted-foreground/10 hover:bg-muted-foreground/20 p-2 transition-colors"
+                className="rounded bg-white/10 hover:bg-white/20 p-2 transition-colors"
               >
-                <FaInstagram className="w-4 h-4 text-muted-foreground" />
+                <FaInstagram className="w-4 h-4 text-white" />
               </Link>
               <Link
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="rounded bg-muted-foreground/10 hover:bg-muted-foreground/20 p-2 transition-colors"
+                className="rounded bg-white/10 hover:bg-white/20 p-2 transition-colors"
               >
-                <FaFacebookF className="w-4 h-4 text-muted-foreground" />
+                <FaFacebookF className="w-4 h-4 text-white" />
               </Link>
               <Link
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="rounded bg-muted-foreground/10 hover:bg-muted-foreground/20 p-2 transition-colors"
+                className="rounded bg-white/10 hover:bg-white/20 p-2 transition-colors"
               >
-                <FaLinkedinIn className="w-4 h-4 text-muted-foreground" />
+                <FaLinkedinIn className="w-4 h-4 text-white" />
               </Link>
               <Link
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
-                className="rounded bg-muted-foreground/10 hover:bg-muted-foreground/20 p-2 transition-colors"
+                className="rounded bg-white/10 hover:bg-white/20 p-2 transition-colors"
               >
-                <FaTwitter className="w-4 h-4 text-muted-foreground" />
+                <FaTwitter className="w-4 h-4 text-white" />
               </Link>
             </div>
           </div>
 
           {/* Middle: Navigation */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="font-semibold mb-5 text-muted-foreground/80">
+            <h3 className="font-semibold mb-5 text-white">
               Navigation
             </h3>
             <ul className="space-y-3">
@@ -96,7 +96,7 @@ const Footer = () => {
 
           {/* Right: Information */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="font-semibold mb-5 text-muted-foreground/80">
+            <h3 className="font-semibold mb-5 text-white">
               Information
             </h3>
             <ul className="space-y-3">

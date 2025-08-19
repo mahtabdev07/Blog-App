@@ -1,16 +1,38 @@
 "use client";
-import { useBlog } from "@/hooks/useBlogs";
+import { useBlog, useBlogOperations } from "@/hooks/useBlogs";
+import { useAuth } from "@/hooks/useAuth";
 import { formatDate } from "@/lib/utils";
-import { ArrowLeft, Calendar, RefreshCw, User } from "lucide-react";
+import { ArrowLeft, Calendar, RefreshCw, User, Edit, Trash2, MoreVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import LoadingSpinner from "../common/LoadingSpinner";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
 
 const BlogDetailView = ({ slug }: { slug: string }) => {
   const { isLoading, data, isError, error, refetch } = useBlog(slug);
+  const { user, isAuthenticated } = useAuth();
+  const { deleteBlog, isDeleting } = useBlogOperations();
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -72,14 +94,55 @@ const BlogDetailView = ({ slug }: { slug: string }) => {
     );
   }
 
+  // Check if current user owns this blog
+  const isOwner = isAuthenticated && user && blog.author.id === user.id;
+
+  const handleDeleteBlog = async () => {
+    try {
+      await deleteBlog(blog.id);
+      setShowDeleteDialog(false);
+    } catch (error) {
+      console.error("Failed to delete blog:", error);
+    }
+  };
+
   return (
     <article>
-      <Link href="/blogs">
-        <Button variant="outline" className="mb-8 hover:bg-gray-100">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Blogs
-        </Button>
-      </Link>
+      <div className="flex items-center justify-between mb-8">
+        <Link href="/blogs">
+          <Button variant="outline" className="hover:bg-gray-100">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Blogs
+          </Button>
+        </Link>
+
+        {/* Owner Actions */}
+        {isOwner && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <MoreVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem asChild>
+                <Link href={`/blog/edit/${blog.slug}`} className="flex items-center cursor-pointer">
+                  <Edit className="mr-2 h-4 w-4" />
+                  <span>Edit Blog</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => setShowDeleteDialog(true)}
+                className="flex items-center cursor-pointer text-red-600 hover:text-red-600 hover:bg-red-50"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                <span>Delete Blog</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
 
       <header className="mb-8 lg:mb-12">
         {blog.status !== "PUBLISHED" && (
@@ -155,6 +218,29 @@ const BlogDetailView = ({ slug }: { slug: string }) => {
           </div>
         </div>
       </footer>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to delete this blog?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your blog post &quot;{blog.title}&quot; 
+              and remove all associated data.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteBlog}
+              disabled={isDeleting}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              {isDeleting ? "Deleting..." : "Delete Blog"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </article>
   );
 };

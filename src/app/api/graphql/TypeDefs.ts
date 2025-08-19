@@ -30,14 +30,71 @@ export const typeDefs = gql`
     updatedAt: String!
   }
   
-   type SearchResult {
+  type SearchResult {
     blogs: [Blog!]!
     totalCount: Int!
+  }
+
+  type AuthPayload {
+    user: User!
+    message: String!
+  }
+
+  type LogoutResponse {
+    message: String!
+  }
+
+  input CreateBlogInput {
+    title: String!
+    excerpt: String
+    content: String!
+    coverImageUrl: String
+    status: BlogStatus = PUBLISHED
+  }
+
+  input UpdateBlogInput {
+    title: String
+    excerpt: String
+    content: String
+    coverImageUrl: String
+    status: BlogStatus
+  }
+
+  type BlogPayload {
+    blog: Blog!
+    message: String!
+  }
+
+  type DeleteBlogResponse {
+    message: String!
+  }
+
+  input SignupInput {
+    name: String!
+    email: String!
+    password: String!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
   }
 
   type Query {
     blogs: [Blog!]!
     blog(slug: String!): Blog
     searchBlogs(query: String!): SearchResult!
+    me: User
+    myBlogs: [Blog!]!
+  }
+
+  type Mutation {
+    signup(input: SignupInput!): AuthPayload!
+    login(input: LoginInput!): AuthPayload!
+    logout: LogoutResponse!
+    
+    createBlog(input: CreateBlogInput!): BlogPayload!
+    updateBlog(id: ID!, input: UpdateBlogInput!): BlogPayload!
+    deleteBlog(id: ID!): DeleteBlogResponse!
   }
 `;

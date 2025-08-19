@@ -16,7 +16,12 @@ export default async function SearchPage({
         Search
       </h1>
 
-      <Searchbar />
+      <Searchbar
+        inputClassName="bg-foreground/5 border-foreground/10 placeholder:text-foreground/40 search-input"
+        variant="secondary"
+        invert={false}
+        buttonClassName="bg-foreground/5 border-foreground/10 hover:bg-foreground/10"
+      />
 
       <Suspense fallback={<LoadingSpinner />}>
         <SearchResults searchQuery={q} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { BookMarked } from "lucide-react";
+import { BookMarked, SquareTerminal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 const navItems = [
   { label: "Home", href: "/", image: "/home-icon.svg" },
   { label: "Blogs", href: "/blogs", image: "/blog-icon.svg" },
+  { label: "My Blogs", href: "/my-blogs", icon: SquareTerminal },
   { label: "Saved", href: "/saved", icon: BookMarked },
   { label: "About", href: "/about", image: "/about-icon.svg" },
 ];
@@ -25,6 +26,8 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  
 
   return (
     <nav className="sticky top-0 left-0 z-50 p-4 hidden md:flex">

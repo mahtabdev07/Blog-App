@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
         hostname: "*",
       },
     ],
+    domains: ["rwvfilm.com"],
   },
 };
 
